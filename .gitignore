@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+
+# Ignore temp data
+addresbook_test\test-output
