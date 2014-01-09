@@ -2,14 +2,12 @@ package com.example.tests;
 
 import org.testng.annotations.Test;
 
-
 public class CreateContactTest extends BasicClass{
-
-
 
 @Test
   public void testContact() throws Exception {
-	openSourseForTest();
+	controlManager.checkNavigationHelper().openSourseForTest();
+	controlManager.checkContactHelper().createContact();
     InitContactParameter z = new InitContactParameter( );
 	z.fname ="First name";
 	z.lname = "Last name";
@@ -24,9 +22,8 @@ public class CreateContactTest extends BasicClass{
 	z.year = "1990";
 	z.add2 = "dcvsvsvv";
 	z.ph2 = "sdvsdvsv";
-    createAndInit(z);
-    submitSomething();
-    comingHome();
+    controlManager.checkContactHelper().createAndInit(z);
+    controlManager.checkNavigationHelper().submit();
+    controlManager.checkNavigationHelper().comingHome();
   }
-  
   }
