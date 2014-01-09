@@ -29,4 +29,18 @@ public class ContactHelper extends BasicHelper {
 	public void createContact() {
 		pushTheButton(By.linkText("add new"));
 	}
+	
+	public void deleteContact(int index) {
+		selectContactOnNumber(index);
+		pushTheButton(By.xpath("(//input[@name='update'])[2]"));	
+}
+
+	public void selectContactOnNumber(int index) {
+		pushTheButton(By.xpath("(//img[@alt='Edit'])["+index+"]"));
+	}
+
+	public void submitModify() {
+		pushTheButton(By.xpath("(//input[@name='update'])[1]"));
+	}
+	
 }

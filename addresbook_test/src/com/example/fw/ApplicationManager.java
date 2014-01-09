@@ -26,7 +26,7 @@ public class ApplicationManager {
 		return navigationF1;
 	}
 
-	public GroupHelper checkGroupHelpr () {
+	public GroupHelper checkGroupHelper () {
 		if (groupF1 == null) {
 			groupF1 = new GroupHelper(this);
 		}

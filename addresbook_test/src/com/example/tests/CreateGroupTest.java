@@ -8,8 +8,8 @@ public class CreateGroupTest extends BasicClass {
   public void testEmpty() throws Exception {
     controlManager.checkNavigationHelper().openSourseForTest();
     controlManager.checkNavigationHelper().goToGroup();
-    controlManager.checkGroupHelpr().createNewGroup();
-    controlManager.checkGroupHelpr().initGroup(new InitGroupParameter("", "", ""));
+    controlManager.checkGroupHelper().createNewGroup();
+    controlManager.checkGroupHelper().initGroup(new InitGroupParameter("", "", ""));
     controlManager.checkNavigationHelper().submit();
     controlManager.checkNavigationHelper().comingHome();
   }

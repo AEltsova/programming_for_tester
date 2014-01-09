@@ -19,4 +19,22 @@ public class GroupHelper extends BasicHelper {
 	public void createNewGroup() {
 		pushTheButton(By.name("new"));
 	}
+	
+	public void deleteGroup(int x) {
+		selectGroupOnNumber(x);
+		pushTheButton(By.name("delete"));	
+	}
+	
+	public void selectGroupOnNumber(int x) {
+		pushTheButton(By.xpath("//input[@name = 'selected[]']["+x+"]"));
+	}
+	
+	public void modifyGroup(int i) {
+		selectGroupOnNumber(i);
+		pushTheButton(By.name("edit"));	
+	}
+	
+	public void submitModifyGroup() {
+		pushTheButton(By.name("update"));		
+	}
 }
