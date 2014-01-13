@@ -1,6 +1,10 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.example.tests.InitContactParameter;
 
@@ -36,11 +40,28 @@ public class ContactHelper extends BasicHelper {
 }
 
 	public void selectContactOnNumber(int index) {
-		pushTheButton(By.xpath("(//img[@alt='Edit'])["+index+"]"));
+		pushTheButton(By.xpath("(//img[@alt='Edit'])["+(index+1)+"]"));
 	}
 
 	public void submitModify() {
 		pushTheButton(By.xpath("(//input[@name='update'])[1]"));
+	}
+
+	public List<InitContactParameter> getContactList() {
+		List<InitContactParameter> arrayOfContact = new ArrayList<InitContactParameter>();
+		int i = 2;
+		List<WebElement> cheks = driver.findElements(By.name("selected[]"));;
+		for (;i<= (cheks.size()+1);) {
+			WebElement cellName = driver.findElement(By.xpath("//tr["+i+"]/td[2]"));
+			WebElement cellLastName = driver.findElement(By.xpath("//tr["+i+"]/td[3]"));
+			InitContactParameter contact = new InitContactParameter();
+
+			contact.lname = cellName.getText();
+			contact.fname = cellLastName.getText();
+			arrayOfContact.add(contact);
+			i++;
+		}
+		return arrayOfContact;
 	}
 	
 }

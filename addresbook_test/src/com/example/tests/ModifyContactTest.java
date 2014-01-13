@@ -1,5 +1,9 @@
 package com.example.tests;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import org.testng.annotations.Test;
@@ -9,7 +13,12 @@ public class ModifyContactTest extends BasicClass{
 	@Test
 	public void modificationContact(){
 		controlManager.checkNavigationHelper().openSourseForTest();
-		controlManager.checkContactHelper().selectContactOnNumber(1);
+		//save list
+	    List<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
+		
+		//do something
+	    int y = 0;
+		controlManager.checkContactHelper().selectContactOnNumber(y);
 		InitContactParameter cont = new InitContactParameter( );
 		Random rand = new Random();
 		cont.fname ="First name"+ rand.nextInt(365);
@@ -24,5 +33,13 @@ public class ModifyContactTest extends BasicClass{
 	    controlManager.checkContactHelper().createAndInit(cont);
 	    controlManager.checkContactHelper().submitModify();
 	    controlManager.checkNavigationHelper().comingHome();
+	    //save new list
+	    List<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
+	    
+	    //check
+	    oldList.remove(y);
+	    oldList.add(cont);
+	    Collections.sort(oldList);
+	  assertEquals(newList, oldList);
 		}
 }
