@@ -33,7 +33,7 @@ public class CreateGroupTest2 extends BasicClass {
     //check 
     oldList.add(x);
     Collections.sort(oldList);
-  assertEquals(newList.size(), oldList.size());
+  assertEquals(newList, oldList);
     
   }
 }

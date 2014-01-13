@@ -28,6 +28,6 @@ public class RemoveGroupTest extends BasicClass {
 	    //check 
 	    oldList.remove(y);
 	    Collections.sort(oldList);
-	  assertEquals(newList.size(), oldList.size());
+	  assertEquals(newList, oldList);
 	    }
 }

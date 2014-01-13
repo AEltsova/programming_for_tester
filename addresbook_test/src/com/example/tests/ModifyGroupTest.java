@@ -33,7 +33,7 @@ public class ModifyGroupTest extends BasicClass {
 	    oldList.remove(y);
 	    oldList.add(group);
 	    Collections.sort(oldList);
-	  assertEquals(newList.size(), oldList.size());
+	  assertEquals(newList, oldList);
 	    }
 
 }
