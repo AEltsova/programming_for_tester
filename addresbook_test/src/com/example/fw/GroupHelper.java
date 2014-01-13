@@ -1,6 +1,10 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.example.tests.InitGroupParameter;
 
@@ -26,7 +30,7 @@ public class GroupHelper extends BasicHelper {
 	}
 	
 	public void selectGroupOnNumber(int x) {
-		pushTheButton(By.xpath("//input[@name = 'selected[]']["+x+"]"));
+		pushTheButton(By.xpath("//input[@name = 'selected[]']["+(x+1)+"]"));
 	}
 	
 	public void modifyGroup(int i) {
@@ -36,5 +40,17 @@ public class GroupHelper extends BasicHelper {
 	
 	public void submitModifyGroup() {
 		pushTheButton(By.name("update"));		
+	}
+	
+	public List<InitGroupParameter> getGroupList() {
+		List<InitGroupParameter> arrayList = new ArrayList<InitGroupParameter>();
+		List<WebElement> cheks =driver.findElements(By.name("selected[]"));
+		for (WebElement newChek : cheks) {
+			InitGroupParameter group = new InitGroupParameter();
+			String title = newChek.getAttribute("title");
+			group.nameGroup = title.substring("Select (".length(), title.length() - ")".length());
+			arrayList.add(group);
+		}
+		return arrayList;
 	}
 }
