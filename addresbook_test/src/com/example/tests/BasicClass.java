@@ -53,15 +53,15 @@ public class BasicClass extends Object{
 			cont.lname =  GenerateString();
 			cont.address= GenerateString();
 			cont.home =   GenerateString();
-			cont.mobile=  GenerateNumber();
+			cont.mobile=  GenerateNumber(8);
 			cont.email =  GenerateString();
-			cont.work =   GenerateNumber();
+			cont.work =   GenerateNumber(7);
 			cont.email2 = GenerateString();
 			cont.day =  day.toString();
 			cont.mounth = Month(mon);
 			cont.year =   year.toString();
 			cont.add2 =   GenerateString();
-			cont.ph2 =    GenerateNumber();
+			cont.ph2 =    GenerateNumber(7);
 			list.add(new Object[]{cont});
 		}
 		return list.iterator();
@@ -69,32 +69,36 @@ public class BasicClass extends Object{
 
 	public String GenerateString() {
 		Random rand = new Random();
-		if (rand.nextInt(3)== 0) 
-			return "";
-		else { 
-			String str = new String();
-			int z = rand.nextInt(30);
-			for (int i = 0; i<z; i++) {
-				int c = 'a' + rand.nextInt(26);
-				str += (char)c;
-			}
-			
-			return str;
-			}
-	}
-	
+		String str = new String();
+		switch (rand.nextInt(4)) { 
+		case 0: str = ""; break;
+		case 1: str+= GenerateNumber(3);  
+		case 2: int z = rand.nextInt(20);
+			       for (int i = 0; i<z; i++) 
+			       {
+				   int c = 'a' + rand.nextInt(26);
+				   str += (char)c;
+				   } str+= " ";
+		case 3: int x = rand.nextInt(20);
+	            	for (int i = 0; i<x; i++) 
+	            	{
+			        int c = 'A' + rand.nextInt(26);
+			        str += (char)c;
+			        } 
+     	           	break;}
+		return str;
+	            	}
 
-	public String GenerateNumber() {
+	public String GenerateNumber(int q) {
 		Random rand = new Random();
 		if (rand.nextInt(3)== 0) 
 			return "";
 		else { 
 			String str = new String();
-			for (int i = 0; i<8; i++) {
+			for (int i = 0; i<q; i++) {
 				int c = rand.nextInt(10);
 				str += c;
 			}
-			
 			return str;
 			}
 	}
