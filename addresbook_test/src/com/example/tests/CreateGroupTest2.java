@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 public class CreateGroupTest2 extends BasicClass {
 	
-@Test
-  public void testNonEmpty() throws Exception {
+@Test  (dataProvider = "randInitGroup")
+  public void testNonEmpty( InitGroupParameter x) throws Exception {
     controlManager.checkNavigationHelper().openSourseForTest();
     controlManager.checkNavigationHelper().goToGroup();
 
@@ -18,12 +18,7 @@ public class CreateGroupTest2 extends BasicClass {
     
     // do something
     controlManager.checkGroupHelper().createNewGroup();
-    InitGroupParameter x = new InitGroupParameter( );
-    Random rand = new Random(47);
-    x.nameGroup = "name "+ rand.nextInt(47);
-    x.head= "empty head "+ rand.nextInt(47);
-    x.foot= "big foot "+ rand.nextInt(47);
-	controlManager.checkGroupHelper().initGroup(x);
+ 	controlManager.checkGroupHelper().initGroup(x);
     controlManager.checkNavigationHelper().submit();
     controlManager.checkNavigationHelper().goToGroup();
 
