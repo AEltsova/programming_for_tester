@@ -2,33 +2,26 @@ package com.example.tests;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.*;
-
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
 
 public class CreateGroupTest2 extends BasicClass {
 	
 @Test  (dataProvider = "randInitGroup")
   public void testNonEmpty( InitGroupParameter x) throws Exception {
-    controlManager.checkNavigationHelper().openSourseForTest();
-    controlManager.checkNavigationHelper().goToGroup();
-
     //save old list
-    List<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();
+	SortedListOf<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();
     
     // do something
-    controlManager.checkGroupHelper().createNewGroup();
- 	controlManager.checkGroupHelper().initGroup(x);
-    controlManager.checkNavigationHelper().submit();
-    controlManager.checkNavigationHelper().goToGroup();
+    controlManager.checkGroupHelper().createGroup(x);
 
     //look what happened
-    List<InitGroupParameter> newList= controlManager.checkGroupHelper().getGroupList();
+    SortedListOf<InitGroupParameter> newList= controlManager.checkGroupHelper().getGroupList();
     
     //check 
     oldList.add(x);
-    Collections.sort(oldList);
-  assertEquals(newList, oldList);
+    assertEquals(newList, oldList);
     
   }
 }

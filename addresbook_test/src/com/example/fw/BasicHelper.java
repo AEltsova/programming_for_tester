@@ -1,9 +1,10 @@
 package com.example.fw;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -19,11 +20,11 @@ public abstract class BasicHelper {
 	}
 
 	public boolean isElementPresent(By by) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	    try {
-	      driver.findElement(by);
-	      return true;
-	    } catch (NoSuchElementException e) {
-	      return false;
+	    	return driver.findElements(by).size()>0;
+	    } finally {
+	    	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	    }
 	  }
 

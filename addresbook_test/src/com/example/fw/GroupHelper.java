@@ -1,12 +1,12 @@
 package com.example.fw;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.example.tests.InitGroupParameter;
+import com.example.utils.*;
 
 public class GroupHelper extends BasicHelper {
 	
@@ -14,43 +14,80 @@ public class GroupHelper extends BasicHelper {
 		super(linkToAM);
 	}
 
-	public void initGroup(InitGroupParameter myBook) {
-		pointInData(By.name("group_name"), myBook.nameGroup);
-		pointInData(By.name("group_header"), myBook.head);
-		pointInData(By.name("group_footer"), myBook.foot);
-	}
-
-	public void createNewGroup() {
-		pushTheButton(By.name("new"));
+	protected SortedListOf<InitGroupParameter> cachedGroups;
+	
+	public SortedListOf<InitGroupParameter> getGroupList() {
+		if (cachedGroups == null) { makeCachedGroup();}
+		return cachedGroups;
 	}
 	
-	public void deleteGroup(int x) {
-		selectGroupOnNumber(x);
-		pushTheButton(By.name("delete"));	
-	}
-	
-	public void selectGroupOnNumber(int x) {
-		pushTheButton(By.xpath("//input[@name = 'selected[]']["+(x+1)+"]"));
-	}
-	
-	public void modifyGroup(int i) {
-		selectGroupOnNumber(i);
-		pushTheButton(By.name("edit"));	
-	}
-	
-	public void submitModifyGroup() {
-		pushTheButton(By.name("update"));		
-	}
-	
-	public List<InitGroupParameter> getGroupList() {
-		List<InitGroupParameter> arrayList = new ArrayList<InitGroupParameter>();
+	private void makeCachedGroup(){
+		cachedGroups = new SortedListOf<InitGroupParameter>();
+		linkToAM.checkNavigationHelper().goToGroup();
 		List<WebElement> cheks =driver.findElements(By.name("selected[]"));
 		for (WebElement newChek : cheks) {
 			InitGroupParameter group = new InitGroupParameter();
 			String title = newChek.getAttribute("title");
-			group.nameGroup = title.substring("Select (".length(), title.length() - ")".length());
-			arrayList.add(group);
+			group.withName(title.substring("Select (".length(), title.length() - ")".length()));
+			cachedGroups.add(group);
 		}
-		return arrayList;
+	}
+	
+	public GroupHelper createGroup (InitGroupParameter x){
+		createNewGroup();
+		initGroup(x);
+		linkToAM.checkNavigationHelper().submit();
+		makeCachedGroup();
+		return this;
+	}
+
+	public InitGroupParameter modifyGroupCombo(int y){
+		modifyGroup(y);	
+	    InitGroupParameter group = new InitGroupParameter( ).withName("name new data");
+	    initGroup(group);
+	    submitModifyGroup();
+		makeCachedGroup();
+		return group;
+	}
+	
+	public GroupHelper deleteGroup(int x) {
+		selectGroupOnNumber(x);
+		removeGroup();
+		makeCachedGroup();
+		return this;
+	}
+
+	public void removeGroup() {
+		pushTheButton(By.name("delete"));
+		cachedGroups = null;
+	}
+	
+	public GroupHelper initGroup(InitGroupParameter myBook) {
+		pointInData(By.name("group_name"), myBook.getNameGroup());
+		pointInData(By.name("group_header"), myBook.getHead());
+		pointInData(By.name("group_footer"), myBook.getFoot());
+		return this;
+	}
+
+	public GroupHelper createNewGroup() {
+		pushTheButton(By.name("new"));
+		return this;
+	}
+
+	public GroupHelper selectGroupOnNumber(int x) {
+		pushTheButton(By.xpath("//input[@name = 'selected[]']["+(x+1)+"]"));
+		return this;
+	}
+	
+	public GroupHelper modifyGroup(int i) {
+		selectGroupOnNumber(i);
+		pushTheButton(By.name("edit"));	
+		return this;
+	}
+	
+	public GroupHelper submitModifyGroup() {
+		pushTheButton(By.name("update"));	
+		cachedGroups = null;
+		return this;
 	}
 }

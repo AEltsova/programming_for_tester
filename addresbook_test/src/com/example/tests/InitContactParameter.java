@@ -1,19 +1,19 @@
 package com.example.tests;
 
 public class InitContactParameter implements Comparable <InitContactParameter>{
-	public String fname;
-	public String lname;
-	public String address;
-	public String home;
-	public String email;
-	public String mobile;
-	public String work;
-	public String email2;
-	public String day;
-	public String mounth;
-	public String year;
-	public String add2;
-	public String ph2;
+	private String fname;
+	private String lname;
+	private String address;
+	private String home;
+	private String email;
+	private String mobile;
+	private String work;
+	private String email2;
+	private String day;
+	private String mounth;
+	private String year;
+	private String add2;
+	private String ph2;
 
 	public InitContactParameter(String fname, String lname, String address,
 			String home, String email, String mobile, String work,
@@ -36,6 +36,107 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 	public InitContactParameter() {
 	}
 		
+	
+	public String getFname() {
+		return fname;
+	}
+	public String getLname() {
+		return lname;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public String getHome() {
+		return home;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public String getWork() {
+		return work;
+	}
+	public String getEmail2() {
+		return email2;
+	}
+	public String getDay() {
+		return day;
+	}
+	public String getMounth() {
+		return mounth;
+	}
+	public String getYear() {
+		return year;
+	}
+	public String getAdd2() {
+		return add2;
+	}
+	public String getPh2() {
+		return ph2;
+	}
+	
+	public InitContactParameter withLname(String name){
+		this.lname = name;
+		return this;
+	}
+	
+	public InitContactParameter withFname(String name){
+		this.fname = name;
+		return this;
+	}
+	public InitContactParameter withAddress(String name){
+		this.address = name;
+		return this;
+	}
+	public InitContactParameter withAdd2(String name){
+		this.add2 = name;
+		return this;
+	}
+	
+	public InitContactParameter withHome(String name){
+		this.home = name;
+		return this;
+	}
+	public InitContactParameter withMobile(String name){
+		this.mobile = name;
+		return this;
+	} 
+	
+	public InitContactParameter withWork(String name){
+		this.work = name;
+		return this;
+	}
+	
+	public InitContactParameter withEmail(String name) {
+		this.email = name;
+		return this;
+	} 
+	
+	public InitContactParameter withEmail2 (String name) {
+		this.email2 = name;
+		return this;
+	}
+	public InitContactParameter withDay (String name) {
+		this.day = name;
+		return this;
+	}
+	public InitContactParameter withYear (String name) {
+		this.year = name;
+		return this;
+	}
+	
+	public InitContactParameter withMounth (String name) {
+		this.mounth = name;
+		return this;
+	}
+	
+	public InitContactParameter withPh2 (String name) {
+		this.ph2 = name;
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		return "InitContactParameter [fname=" + fname + ", lname=" + lname
@@ -73,6 +174,4 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
    if (other.lname == null)
       other.lname = "";
 		return 	this.lname.toLowerCase().compareTo(other.lname.toLowerCase());	}
-	
-	
 }

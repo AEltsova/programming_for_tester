@@ -11,8 +11,6 @@ import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
 
-
-
 public class BasicClass extends Object{
 
 	static protected ApplicationManager controlManager;
@@ -30,11 +28,11 @@ public class BasicClass extends Object{
 	@DataProvider
 	public Iterator<Object[]> randInitGroup() {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i =0; i<3; i++){
-			InitGroupParameter groupR = new InitGroupParameter();	
-			groupR.nameGroup = GenerateString();
-			groupR.head = GenerateString();
-			groupR.foot = GenerateString();
+		for (int i =0; i<2; i++){
+			InitGroupParameter groupR = new InitGroupParameter()	
+			.withName(GenerateString())
+			.withHead(GenerateString())
+			.withFooter(GenerateString());
 			list.add(new Object[]{groupR});
 		}
 		return list.iterator();
@@ -44,24 +42,24 @@ public class BasicClass extends Object{
 	public Iterator<Object[]> randInitContact() {
 		Random rnd = new Random();
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i =0; i<5; i++){
-			Integer day = rnd.nextInt(30);
+		for (int i =0; i<4; i++){
+			Integer day = rnd.nextInt(30)+1;
 			Integer mon = rnd.nextInt(11);
 			Integer year = rnd.nextInt(110)+1904;
-			InitContactParameter cont = new InitContactParameter();	
-			cont.fname =  GenerateString();
-			cont.lname =  GenerateString();
-			cont.address= GenerateString();
-			cont.home =   GenerateString();
-			cont.mobile=  GenerateNumber(8);
-			cont.email =  GenerateString();
-			cont.work =   GenerateNumber(7);
-			cont.email2 = GenerateString();
-			cont.day =  day.toString();
-			cont.mounth = Month(mon);
-			cont.year =   year.toString();
-			cont.add2 =   GenerateString();
-			cont.ph2 =    GenerateNumber(7);
+			InitContactParameter cont = new InitContactParameter()	
+			.withFname(GenerateString())
+			.withLname (GenerateString())
+			.withAddress (GenerateString())
+			.withHome (GenerateString())
+			.withMobile(GenerateNumber(8))
+			.withEmail (GenerateString())
+			.withWork(GenerateNumber(7))
+			.withEmail2(GenerateString())
+			.withDay(day.toString())
+			.withMounth(Month(mon))
+			.withYear(year.toString())
+			.withAdd2 (GenerateString())
+			.withPh2 (GenerateNumber(7));
 			list.add(new Object[]{cont});
 		}
 		return list.iterator();

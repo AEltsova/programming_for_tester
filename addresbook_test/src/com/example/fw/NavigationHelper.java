@@ -9,18 +9,34 @@ public class NavigationHelper extends BasicHelper{
 	}
 
 	public void comingHome() {
+		if (! checkOnMain()){
 		pushTheButton(By.linkText("home"));
-	}
+	}}
 
 	public void submit() {
 		pushTheButton(By.name("submit"));
+		linkToAM.checkGroupHelper().cachedGroups = null;
+		linkToAM.checkContactHelper().cachedContacts = null;
 	}
 
 	public void openSourseForTest() {
-		driver.get(linkToAM.baseUrl + "/addressbookv4.1.4/");
+		if (! checkOnMain()){
+        comingHome();
+	}}
+
+	private boolean checkOnMain() {
+		if (driver.findElements(By.id("maintable")).size() > 0){return true;}
+		else {return false;}
 	}
 
 	public void goToGroup (){
-		pushTheButton(By.linkText("groups"));
+		if (! chekOnGroup()){
+		pushTheButton(By.linkText("groups"));}
+	}
+
+	private boolean chekOnGroup() {
+		if (driver.getCurrentUrl().contains("/group.php") 
+				&& driver.findElements(By.name("New group")).size() > 0){return true;}
+		else {return false;}
 	}
 }

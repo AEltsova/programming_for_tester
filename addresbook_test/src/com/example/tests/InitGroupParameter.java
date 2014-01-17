@@ -1,9 +1,21 @@
 package com.example.tests;
 
 public class InitGroupParameter implements Comparable <InitGroupParameter>  {
-	public String nameGroup;
-	public String head;
-	public String foot;
+	private String nameGroup;
+	private String head;
+	private String foot;
+
+	public String getNameGroup() {
+		return nameGroup;
+	}
+
+	public String getHead() {
+		return head;
+	}
+
+	public String getFoot() {
+		return foot;
+	}
 
 	public InitGroupParameter(String nameGroup, String head, String foot) {
 		this.nameGroup = nameGroup;
@@ -12,6 +24,19 @@ public class InitGroupParameter implements Comparable <InitGroupParameter>  {
 	}
 	
 	public InitGroupParameter() {
+	}
+	
+	public InitGroupParameter withName(String name) {
+		this.nameGroup = name;
+		return this;
+	}
+	public InitGroupParameter withHead(String head) {
+		this.head = head;
+		return this;
+	}
+	public InitGroupParameter withFooter(String foot) {
+		this.foot = foot;
+		return this;
 	}
 
 	@Override

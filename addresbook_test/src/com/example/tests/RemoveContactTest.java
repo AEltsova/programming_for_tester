@@ -2,10 +2,9 @@ package com.example.tests;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
 
 public class RemoveContactTest extends BasicClass {
 
@@ -13,18 +12,17 @@ public class RemoveContactTest extends BasicClass {
 	public void removeContact(){
 		controlManager.checkNavigationHelper().openSourseForTest();
 		//save list
-	    List<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
+		SortedListOf<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
 		
 		//do something
 	    int y = 0;
 	    controlManager.checkContactHelper().deleteContact(y);
-	    controlManager.checkNavigationHelper().comingHome();
+	
 	    //save new list
-	    List<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
+	    SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
 	    
 	    //check
 	    oldList.remove(y);
-	    Collections.sort(oldList);
-	  assertEquals(newList.size(), oldList.size());
+	    assertEquals(newList.size(), oldList.size());
 	   	}
 }
