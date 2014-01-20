@@ -1,6 +1,7 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
 
@@ -21,7 +22,6 @@ public class RemoveGroupTest extends BasicClass {
 	    SortedListOf<InitGroupParameter> newList= controlManager.checkGroupHelper().getGroupList();
 	    
 	    //check 
-	    oldList.remove(y);
- 	  assertEquals(newList, oldList);
+	    assertThat(newList, equalTo(oldList.without(y))); 
 	    }
 }

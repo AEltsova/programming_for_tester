@@ -1,6 +1,7 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
 
@@ -10,7 +11,6 @@ public class RemoveContactTest extends BasicClass {
 
 	@Test
 	public void removeContact(){
-		controlManager.checkNavigationHelper().openSourseForTest();
 		//save list
 		SortedListOf<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
 		
@@ -22,7 +22,6 @@ public class RemoveContactTest extends BasicClass {
 	    SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
 	    
 	    //check
-	    oldList.remove(y);
-	    assertEquals(newList.size(), oldList.size());
+	    assertThat(newList, equalTo(oldList.without(y))); 
 	   	}
 }

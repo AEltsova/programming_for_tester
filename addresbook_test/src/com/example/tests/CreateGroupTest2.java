@@ -1,6 +1,7 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
 
@@ -20,8 +21,6 @@ public class CreateGroupTest2 extends BasicClass {
     SortedListOf<InitGroupParameter> newList= controlManager.checkGroupHelper().getGroupList();
     
     //check 
-    oldList.add(x);
-    assertEquals(newList, oldList);
-    
+    assertThat(newList, equalTo(oldList.withAdded(x))); 
   }
 }

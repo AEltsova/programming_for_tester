@@ -70,8 +70,10 @@ public class BasicClass extends Object{
 		String str = new String();
 		switch (rand.nextInt(4)) { 
 		case 0: str = ""; break;
-		case 1: str+= GenerateNumber(3);  
-		case 2: int z = rand.nextInt(20);
+		case 1: for (int i = 0; i<3; i++) {
+			int c = rand.nextInt(10);
+			str += c;}
+       	case 2: int z = rand.nextInt(20);
 			       for (int i = 0; i<z; i++) 
 			       {
 				   int c = 'a' + rand.nextInt(26);
@@ -89,16 +91,19 @@ public class BasicClass extends Object{
 
 	public String GenerateNumber(int q) {
 		Random rand = new Random();
-		if (rand.nextInt(3)== 0) 
-			return "";
-		else { 
-			String str = new String();
-			for (int i = 0; i<q; i++) {
-				int c = rand.nextInt(10);
-				str += c;
+		String strn = new String();
+		switch (rand.nextInt(3)){ 
+		case 0:  strn = ""; 	break;
+		case 1: for (int i = 0; i<q; i++) {
+			int c = rand.nextInt(10);
+			strn += c;} 	break;
+		case 2: String num = new String();
+		for (int i = 0; i<3; i++){num +=rand.nextInt(10);}
+			strn ="+7 ("+ num +") ";
+			for (int i = 0; i<5; i++){num +=rand.nextInt(10);}
+			strn += num; 	break;
 			}
-			return str;
-			}
+			return strn;
 	}
 
 public static String  Month( int i){
