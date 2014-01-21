@@ -50,7 +50,7 @@ public class BasicClass extends Object{
 			.withFname(GenerateString())
 			.withLname (GenerateString())
 			.withAddress (GenerateString())
-			.withHome (GenerateString())
+			.withHome (GenerateNumber(6))
 			.withMobile(GenerateNumber(8))
 			.withEmail (GenerateString())
 			.withWork(GenerateNumber(7))

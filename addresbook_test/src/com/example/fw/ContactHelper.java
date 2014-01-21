@@ -37,6 +37,53 @@ public class ContactHelper extends BasicHelper {
 		i++;
 	}
 }	
+	
+	public SortedListOf<InitContactParameter> mainTable(){
+	linkToAM.checkNavigationHelper().comingHome();
+	SortedListOf<InitContactParameter> mainContact = new SortedListOf<InitContactParameter>();
+	int i = 2;
+	List<WebElement> cheks = driver.findElements(By.name("selected[]"));;
+	for (;i<= (cheks.size()+1);) {
+		WebElement cellName = driver.findElement(By.xpath("//tr["+i+"]/td[2]"));
+		WebElement cellLastName = driver.findElement(By.xpath("//tr["+i+"]/td[3]"));
+		WebElement cellPhone = driver.findElement(By.xpath("//tr["+i+"]/td[5]"));
+		InitContactParameter contact = new InitContactParameter();
+		contact.withFname(cellLastName.getText()+cellName.getText());
+		contact.withHome(cellPhone.getText());
+		mainContact.add(contact);
+		i++;
+	}
+	return mainContact;
+}
+	
+	public SortedListOf<InitContactParameter> printPhoneTable(){
+		SortedListOf<InitContactParameter> printContact = new SortedListOf<InitContactParameter>();
+		List<WebElement> x = driver.findElements(By.xpath("//tr"));
+		for (int i = 1;i<= x.size();i++) {
+			for (int j = 1; j<=3; j++){
+				WebElement cellPhone = driver.findElement(By.xpath("//tr["+i+"]/td["+j+"]"));
+				String cut = cellPhone.getText();
+				String check = new String(cut);
+		
+				check = check.replaceAll("[.]", "");
+				if  (  !check.isEmpty()){
+				      WebElement cellName = driver.findElement(By.xpath("//tr["+i+"]/td["+j+"]/b"));
+		              InitContactParameter contact = new InitContactParameter();
+			          contact.withFname(cellName.getText());
+        		           if (cut.contains("H: ")){
+		    		        int start = cut.indexOf("H: ")+3;
+		            		int fin = cut.indexOf("\n",start);
+				            cut = cut.substring(start, fin);
+			                }  else cut = "";
+        					contact.withHome(cut);
+        					printContact.add(contact);}
+			         else break;
+
+		}
+		}
+		return printContact;
+	}
+	
 	public InitContactParameter modifyContactCombo (int y){
 		selectContactOnNumber(y);
 		Random rand = new Random();
@@ -104,6 +151,10 @@ public class ContactHelper extends BasicHelper {
 		pushTheButton(By.xpath("(//input[@name='update'])[1]"));
 		cachedContacts = null;
 		   return this;
+	}
+	public ContactHelper printPhones(){
+		pushTheButton(By.linkText("print phones"));
+		 return this;
 	}
 
 }

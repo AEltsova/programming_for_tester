@@ -142,8 +142,9 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 	@Override
 	public String toString() {
 		return "InitContactParameter [fname=" + fname + ", lname=" + lname
-				+ "]";
+				+ "home=" + home + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		int result = 1;

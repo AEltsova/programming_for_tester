@@ -17,7 +17,7 @@ public class RemoveContactTest extends BasicClass {
 		//do something
 	    int y = 0;
 	    controlManager.checkContactHelper().deleteContact(y);
-	
+	    
 	    //save new list
 	    SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
 	    
