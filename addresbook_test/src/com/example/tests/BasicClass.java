@@ -11,6 +11,9 @@ import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
 
+import static com.example.tests.GroupDataGenerator.createRandomGroups;
+import static com.example.tests.ContactDataGenerator.createRandomContact;;
+
 public class BasicClass extends Object{
 
 	static protected ApplicationManager controlManager;
@@ -27,45 +30,30 @@ public class BasicClass extends Object{
 	
 	@DataProvider
 	public Iterator<Object[]> randInitGroup() {
-		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i =0; i<2; i++){
-			InitGroupParameter groupR = new InitGroupParameter()	
-			.withName(GenerateString())
-			.withHead(GenerateString())
-			.withFooter(GenerateString());
-			list.add(new Object[]{groupR});
-		}
-		return list.iterator();
+		return convertListForProvider(createRandomGroups(3)).iterator();
 	}
 	
-	@DataProvider
-	public Iterator<Object[]> randInitContact() {
-		Random rnd = new Random();
+	private List<Object[]> convertListForProvider(List<InitGroupParameter> something) {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i =0; i<4; i++){
-			Integer day = rnd.nextInt(30)+1;
-			Integer mon = rnd.nextInt(11);
-			Integer year = rnd.nextInt(110)+1904;
-			InitContactParameter cont = new InitContactParameter()	
-			.withFname(GenerateString())
-			.withLname (GenerateString())
-			.withAddress (GenerateString())
-			.withHome (GenerateNumber(6))
-			.withMobile(GenerateNumber(8))
-			.withEmail (GenerateString())
-			.withWork(GenerateNumber(7))
-			.withEmail2(GenerateString())
-			.withDay(day.toString())
-			.withMounth(Month(mon))
-			.withYear(year.toString())
-			.withAdd2 (GenerateString())
-			.withPh2 (GenerateNumber(7));
-			list.add(new Object[]{cont});
+		for (InitGroupParameter smthng : something) {
+			list.add(new Object[]{smthng});
 		}
-		return list.iterator();
+		return list;
+	}
+	private List<Object[]> convertContListForProvider(List<InitContactParameter> something) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (InitContactParameter smthng : something) {
+			list.add(new Object[]{smthng});
+		}
+		return list;
 	}
 
-	public String GenerateString() {
+	@DataProvider
+	public Iterator<Object[]> randInitContact() {
+		return convertContListForProvider(createRandomContact(5)).iterator();
+		}
+
+	public static String GenerateString() {
 		Random rand = new Random();
 		String str = new String();
 		switch (rand.nextInt(4)) { 
@@ -89,7 +77,7 @@ public class BasicClass extends Object{
 		return str;
 	            	}
 
-	public String GenerateNumber(int q) {
+	public static String GenerateNumber(int q) {
 		Random rand = new Random();
 		String strn = new String();
 		switch (rand.nextInt(3)){ 
@@ -106,7 +94,4 @@ public class BasicClass extends Object{
 			return strn;
 	}
 
-public static String  Month( int i){
- 	String[] month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-return month[i];
-}}
+}
