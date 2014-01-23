@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thoughtworks.xstream.XStream;
+
 import static com.example.tests.BasicClass.GenerateString;
 
 public class GroupDataGenerator {
@@ -39,12 +41,12 @@ public class GroupDataGenerator {
 	}
 
 	private static void saveGroupAsXml(List<InitGroupParameter> groups, File file) throws IOException {
+			XStream xstream = new XStream();
+			xstream.alias("group", InitGroupParameter.class);
+			String xml = xstream.toXML(groups);
 			FileWriter writer = new FileWriter(file);
-			for (InitGroupParameter group : groups) {
-				writer.write(group.getNameGroup()+", "+ group.getHead()+", "+group.getFoot()+ "\n");
-			}
+			writer.write(xml);
 			writer.close();
-			
 		}
 
 	private static void saveGroupAsCsv(List<InitGroupParameter> groups, File file) throws IOException {
@@ -82,5 +84,11 @@ public class GroupDataGenerator {
 		buff.close();
 		return list;
 	} 
+	
+	public static List<InitGroupParameter> loadGroupFromXml(File file){
+		XStream xstream = new XStream();
+		xstream.alias("group", InitGroupParameter.class);
+		return  (List<InitGroupParameter>)xstream.fromXML(file);
+	}
 
 }

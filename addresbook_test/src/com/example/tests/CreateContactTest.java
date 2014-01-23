@@ -1,6 +1,7 @@
 package com.example.tests;
 
-import static com.example.tests.ContactDataGenerator.loadContactFromFile;
+import static com.example.tests.ContactDataGenerator.loadContactFromCsv;
+import static com.example.tests.ContactDataGenerator.loadContactFromXml;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -17,11 +18,11 @@ public class CreateContactTest extends BasicClass{
 
 	
 	@DataProvider
-	public Iterator<Object[]> loadContactFromCsv() throws IOException {
-		return convertContListForProvider(loadContactFromFile(new File("contactList.txt"))).iterator();
+	public Iterator<Object[]> loadContactFromFile() throws IOException {
+		return convertContListForProvider(loadContactFromXml(new File("contactList.xml"))).iterator();
 		}
 	
-@Test  (dataProvider = "loadContactFromCsv")
+@Test  (dataProvider = "loadContactFromFile")
   public void testContact(InitContactParameter z) throws Exception {
 	//save list
 	SortedListOf<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();

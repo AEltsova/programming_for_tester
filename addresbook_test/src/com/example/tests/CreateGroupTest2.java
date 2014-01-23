@@ -1,6 +1,7 @@
 package com.example.tests;
 
 import static com.example.tests.GroupDataGenerator.loadGroupFromCsv;
+import static com.example.tests.GroupDataGenerator.loadGroupFromXml;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -17,7 +18,7 @@ public class CreateGroupTest2 extends BasicClass {
 	
 	@DataProvider
 	public Iterator<Object[]> loadGroupFromFile() throws IOException {
-		return convertListForProvider(loadGroupFromCsv(new File("groupList.txt"))).iterator();
+		return convertListForProvider(loadGroupFromXml(new File("groupList.xml"))).iterator();
 	}
 	
 @Test  (dataProvider = "loadGroupFromFile")

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.thoughtworks.xstream.XStream;
+
 import static com.example.tests.BasicClass.GenerateString;
 import static com.example.tests.BasicClass.GenerateNumber;;
 
@@ -71,15 +73,19 @@ public class ContactDataGenerator {
 		}
 
 		private static void saveContactAsXml(List<InitContactParameter> cont, File file) throws IOException {
-				FileWriter writer = new FileWriter(file);
-				for (InitContactParameter contact : cont) {
-					writer.write(contact.getFname()+", "+ contact.getLname()+", "+contact.getAddress()+", "
-				+ contact.getHome()+", "+contact.getMobile()+", "+ contact.getWork()+", "+contact.getEmail()
-				+", "+ contact.getEmail2()+", "+contact.getDay()+", "+ contact.getMounth()+", "+contact.getYear()
-				+", "+ contact.getAdd2()+", "+contact.getPh2()+ "\n");
-				}
-				writer.close();	
+			XStream xstream = new XStream();
+			xstream.alias("contact", InitContactParameter.class);
+			String xml = xstream.toXML(cont);
+			FileWriter writer = new FileWriter(file);
+			writer.write(xml);
+			writer.close();
 			}
+		
+		public static List<InitContactParameter> loadContactFromXml(File file){
+			XStream xstream = new XStream();
+			xstream.alias("contact", InitContactParameter.class);
+			return  (List<InitContactParameter>)xstream.fromXML(file);
+		}
 
 		private static  void saveContactAsCsv(List<InitContactParameter> cont, File file) throws IOException {
 			FileWriter writer = new FileWriter(file);
@@ -92,7 +98,7 @@ public class ContactDataGenerator {
 			writer.close();
 		}
 		
-		public static List<InitContactParameter> loadContactFromFile(File file) throws IOException {
+		public static List<InitContactParameter> loadContactFromCsv(File file) throws IOException {
 			List<InitContactParameter>  list = new ArrayList<InitContactParameter>();
 			FileReader read = new FileReader(file);
 			BufferedReader buff = new BufferedReader(read);
