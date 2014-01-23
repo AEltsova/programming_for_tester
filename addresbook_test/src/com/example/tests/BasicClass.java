@@ -1,9 +1,7 @@
 package com.example.tests;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +18,10 @@ public class BasicClass extends Object{
 		 
 	@BeforeTest
 	public void setUp() throws Exception {
-		controlManager = new ApplicationManager();
+		String confFile = System.getProperty("configFile","application.properties" );
+		Properties properties = new Properties();
+		properties.load(new FileReader(new File(confFile)));
+		controlManager = new ApplicationManager(properties);
 	    }
 
 	@AfterTest

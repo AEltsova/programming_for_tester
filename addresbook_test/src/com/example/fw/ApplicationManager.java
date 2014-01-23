@@ -1,7 +1,10 @@
 package com.example.fw;
 
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class ApplicationManager {
 	
@@ -10,11 +13,16 @@ public class ApplicationManager {
 	public NavigationHelper navigationF1;
 	public  WebDriver driver;
 	public  String baseUrl;
+	private Properties properties;
 	
-	public ApplicationManager () {	
-	    driver = new FirefoxDriver();
-	    baseUrl = "http://localhost/";
-		driver.get(baseUrl + "/addressbookv4.1.4/");
+	public ApplicationManager (Properties properties) {	
+	    this.properties = properties;
+	    String browser = properties.getProperty("browser");
+	    if ("firefox".equals(browser)){ driver = new FirefoxDriver();}
+	    else if("ie".equals(browser)){ driver = new InternetExplorerDriver();}
+	    else {throw new Error ("Never heard about this browser");}
+	    baseUrl = properties.getProperty("baseUrl");
+		driver.get(baseUrl);
    }
 	
 	public NavigationHelper checkNavigationHelper () {
