@@ -110,13 +110,15 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 	}
 	
 	public InitContactParameter withEmail(String name) {
-		if (name != null &&  !name.isEmpty()){this.email = name +"@mail.com";}
-		else this.email = name;
+		if (name.contains("@mail")){this.email = name;}
+		else if (name != null &&  !name.isEmpty()){this.email = name +"@mail.com";}
+        this.email = name;
 		return this;
 	} 
 	
 	public InitContactParameter withEmail2 (String name) {
-		if ( name != null &&  !name.isEmpty()){this.email2 = name +"@mail.com";}
+		if (name.contains("@mail")){this.email2 = name;}
+		else if ( name != null &&  !name.isEmpty()){this.email2 = name +"@mail.com";}
 		else this.email2 = name;
 		return this;
 	}

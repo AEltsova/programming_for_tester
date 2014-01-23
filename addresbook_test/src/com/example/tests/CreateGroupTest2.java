@@ -1,15 +1,26 @@
 package com.example.tests;
 
+import static com.example.tests.GroupDataGenerator.loadGroupFromCsv;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.example.utils.SortedListOf;
 
 public class CreateGroupTest2 extends BasicClass {
 	
-@Test  (dataProvider = "randInitGroup")
+	@DataProvider
+	public Iterator<Object[]> loadGroupFromFile() throws IOException {
+		return convertListForProvider(loadGroupFromCsv(new File("groupList.txt"))).iterator();
+	}
+	
+@Test  (dataProvider = "loadGroupFromFile")
   public void testNonEmpty( InitGroupParameter x) throws Exception {
     //save old list
 	SortedListOf<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();

@@ -33,14 +33,14 @@ public class BasicClass extends Object{
 		return convertListForProvider(createRandomGroups(3)).iterator();
 	}
 	
-	private List<Object[]> convertListForProvider(List<InitGroupParameter> something) {
+	protected List<Object[]> convertListForProvider(List<InitGroupParameter> something) {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (InitGroupParameter smthng : something) {
 			list.add(new Object[]{smthng});
 		}
 		return list;
 	}
-	private List<Object[]> convertContListForProvider(List<InitContactParameter> something) {
+	protected List<Object[]> convertContListForProvider(List<InitContactParameter> something) {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (InitContactParameter smthng : something) {
 			list.add(new Object[]{smthng});

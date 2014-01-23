@@ -1,6 +1,8 @@
 package com.example.tests;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class GroupDataGenerator {
 	private static void saveGroupAsCsv(List<InitGroupParameter> groups, File file) throws IOException {
 		FileWriter writer = new FileWriter(file);
 		for (InitGroupParameter group : groups) {
-			writer.write(group.getNameGroup()+", "+ group.getHead()+", "+group.getFoot()+ "\n");
+			writer.write(group.getNameGroup()+","+ group.getHead()+","+group.getFoot()+ ",!" +"\n");
 		}
 		writer.close();
 		
@@ -66,5 +68,19 @@ public class GroupDataGenerator {
 		return list;
 	}
 	
+	public static List<InitGroupParameter> loadGroupFromCsv(File file) throws IOException{
+		List<InitGroupParameter> list = new ArrayList<InitGroupParameter>();
+		FileReader read = new FileReader(file);
+		BufferedReader buff = new BufferedReader(read);
+		String line =buff.readLine();
+		while( line!= null){
+			String[] part = line.split(",");
+			InitGroupParameter group = new InitGroupParameter().withName(part[0]).withHead(part[1]).withFooter(part[2]);
+			list.add(group);
+			line = buff.readLine();
+		};
+		buff.close();
+		return list;
+	} 
 
 }

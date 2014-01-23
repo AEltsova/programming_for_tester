@@ -1,6 +1,8 @@
 package com.example.tests;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,12 +84,29 @@ public class ContactDataGenerator {
 		private static  void saveContactAsCsv(List<InitContactParameter> cont, File file) throws IOException {
 			FileWriter writer = new FileWriter(file);
 			for (InitContactParameter contact : cont) {
-				writer.write(contact.getFname()+", "+ contact.getLname()+", "+contact.getAddress()+", "
-			+ contact.getHome()+", "+contact.getMobile()+", "+ contact.getWork()+", "+contact.getEmail()
-			+", "+ contact.getEmail2()+", "+contact.getDay()+", "+ contact.getMounth()+", "+contact.getYear()
-			+", "+ contact.getAdd2()+", "+contact.getPh2()+ "\n");
+				writer.write(contact.getFname()+","+ contact.getLname()+","+contact.getAddress()+","
+			+ contact.getHome()+","+contact.getMobile()+","+ contact.getWork()+","+contact.getEmail()
+			+","+ contact.getEmail2()+","+contact.getDay()+","+ contact.getMounth()+","+contact.getYear()
+			+","+ contact.getAdd2()+","+contact.getPh2()+ ",!"+"\n");
 			}
 			writer.close();
+		}
+		
+		public static List<InitContactParameter> loadContactFromFile(File file) throws IOException {
+			List<InitContactParameter>  list = new ArrayList<InitContactParameter>();
+			FileReader read = new FileReader(file);
+			BufferedReader buff = new BufferedReader(read);
+			String line =buff.readLine();
+			while( line!= null){
+				String[] part = line.split(",");
+				InitContactParameter cont = new InitContactParameter().withFname(part[0]).withLname(part[1]).withAddress(part[2])
+						.withHome(part[3]).withMobile(part[4]).withWork(part[5]).withEmail(part[6]).withEmail2(part[7]).withDay(part[8]).withMounth(part[9])
+						.withYear(part[10]).withAdd2(part[11]).withPh2(part[12]);
+				list.add(cont);
+				line = buff.readLine();
+			};
+			buff.close();
+			return list;
 		}
 	}
 
