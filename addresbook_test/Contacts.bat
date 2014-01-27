@@ -1,0 +1,1 @@
+C:\java\programming_for_tester\addresbook_test>java -cp bin;C:\java\util\xstream-1.4.6\lib\xstream-1.4.6.jar;C:\java\util\xstream-1.4.6\lib\xstream\xpp3_min-1.1.4c.jar;C:\java\util\xstream-1.4.6\lib\xstream\xmlpull-1.1.3.1.jar;C:\Selenium\selenium-server-standalone-2.38.0.jar com.example.tests.ContactDataGenerator 7 contactList.xml xml
