@@ -1,0 +1,40 @@
+package com.example.fw;
+
+import org.netbeans.jemmy.operators.JButtonOperator;
+import org.netbeans.jemmy.operators.JDialogOperator;
+import org.netbeans.jemmy.operators.JFrameOperator;
+import org.netbeans.jemmy.operators.JTextFieldOperator;
+import org.netbeans.jemmy.operators.JTreeOperator;
+
+import com.example.utils.SortedListOf;
+
+public class FolderHelper {
+
+	private final ApplicationManager someControl;
+
+	public FolderHelper(ApplicationManager applicationManager) {
+		this.someControl = applicationManager;
+	
+	}
+
+	public SortedListOf<String> getFolder() {
+		SortedListOf<String> list = new SortedListOf<String>();
+		JFrameOperator mainFR= someControl.getApplication();
+        JTreeOperator tree = new JTreeOperator(mainFR);
+        Object[] children = tree.getChildren(tree.getRoot());
+        for (Object child : children){
+        	list.add(""+child);
+        }
+		return new SortedListOf<String>(list);
+	}
+
+	public FolderHelper createFolder(String folder) {
+		someControl.getMenuHelp().pushFolder();
+		JDialogOperator dialog = new JDialogOperator(someControl.getApplication());
+		new JTextFieldOperator(dialog).setText(folder);
+		new JButtonOperator(dialog, "OK").push();
+		return this;
+		}
+
+	
+}
