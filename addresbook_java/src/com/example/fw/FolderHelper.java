@@ -34,5 +34,14 @@ public class FolderHelper extends HelperBasic{
 		new JButtonOperator(dialog, "OK").push();
 		return waitForError("Warning", 3000);
 		}
+
+	public void removeFolderCombo(String folder) {
+		JFrameOperator mainFR= mainFrame;
+        JTreeOperator tree = new JTreeOperator(mainFR);
+         tree.selectRow(tree.findRow(folder));
+		someControl.getMenuHelp().removeFolder();
+		JDialogOperator dialog = new JDialogOperator(mainFrame);
+		new JButtonOperator(dialog, "Yes").push();
+	}
 	
 }
