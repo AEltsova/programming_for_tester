@@ -51,6 +51,15 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     Collections.sort(newItems.list);
     return newItems;
   }
+
+  public SortedListOf<T> withAdded(T item, T item2) {
+	    SortedListOf<T> newItems = new SortedListOf<T>();
+	    newItems.list = Lists.newArrayList(this.list);
+	    newItems.list.add(item);
+	    newItems.list.add(item2);
+	    Collections.sort(newItems.list);
+	    return newItems;
+	  }
   
   public SortedListOf<T> without(T item) {
     SortedListOf<T> newItems = new SortedListOf<T>();

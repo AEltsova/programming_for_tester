@@ -7,9 +7,8 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 public class ApplicationManager {
 	
 	
-	public  String baseUrl;
 	public FolderHelper folderHelper;
-	private JFrameOperator mainFrame;
+	private JFrameOperator mainWindow;
 	private MenuHelper menuHelper; 
 	
 	public ApplicationManager () {	
@@ -30,14 +29,14 @@ public class ApplicationManager {
 }
 	
 	public JFrameOperator getApplication() {
-		if (mainFrame == null){
+		if (mainWindow == null){
 			try {
 				new ClassReference("addressbook.AddressBookFrame").startApplication();
-				mainFrame = new JFrameOperator("jAddressBook");
+				mainWindow = new JFrameOperator("jAddressBook");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-				return mainFrame;
+				return mainWindow;
 		}
 }

@@ -2,16 +2,15 @@ package com.example.fw;
 
 import org.netbeans.jemmy.operators.JMenuBarOperator;
 
-public class MenuHelper {
+public class MenuHelper extends HelperBasic{
 
-	private final ApplicationManager someControl;
 
 	public MenuHelper(ApplicationManager applicationManager) {
-		this.someControl = applicationManager;
+		super(applicationManager);
 	}
 
 	public void pushFolder(){
-		JMenuBarOperator menu = new JMenuBarOperator(someControl.getApplication());
+		JMenuBarOperator menu = new JMenuBarOperator(mainFrame);
 		menu.pushMenuNoBlock("File|New Folder...");
 	}
 

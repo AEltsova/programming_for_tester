@@ -8,18 +8,17 @@ import org.netbeans.jemmy.operators.JTreeOperator;
 
 import com.example.utils.SortedListOf;
 
-public class FolderHelper {
+public class FolderHelper extends HelperBasic{
 
-	private final ApplicationManager someControl;
-
+	
 	public FolderHelper(ApplicationManager applicationManager) {
-		this.someControl = applicationManager;
+		super(applicationManager);
 	
 	}
 
 	public SortedListOf<String> getFolder() {
 		SortedListOf<String> list = new SortedListOf<String>();
-		JFrameOperator mainFR= someControl.getApplication();
+		JFrameOperator mainFR= mainFrame;
         JTreeOperator tree = new JTreeOperator(mainFR);
         Object[] children = tree.getChildren(tree.getRoot());
         for (Object child : children){
@@ -28,13 +27,12 @@ public class FolderHelper {
 		return new SortedListOf<String>(list);
 	}
 
-	public FolderHelper createFolder(String folder) {
+	public String createFolder(String folder) {
 		someControl.getMenuHelp().pushFolder();
-		JDialogOperator dialog = new JDialogOperator(someControl.getApplication());
+		JDialogOperator dialog = new JDialogOperator(mainFrame);
 		new JTextFieldOperator(dialog).setText(folder);
 		new JButtonOperator(dialog, "OK").push();
-		return this;
+		return waitForError("Warning", 3000);
 		}
-
 	
 }
