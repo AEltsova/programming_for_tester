@@ -43,4 +43,18 @@ public class ContactHelper extends HelperBasic {
 		return contact;
 	}
 	
+	public void getEmptyCont() {
+		waitMainWindow();
+		onControl.getAutoHelp().click("TListView1").send("{DOWN}{SPACE}").click("Edit")
+		.winWaitAndActivate("Information", "", 5000).click("TButton1");
+		waitMainWindow();
+	}
+
+	public void removeFirstContact() {
+		waitMainWindow();
+		onControl.getAutoHelp().click("TListView1").send("{DOWN}{SPACE}").click("Delete")
+		.winWaitAndActivate("Confirm", "", 3000).click("TButton2");
+		waitMainWindow();
+	}
+	
 }
