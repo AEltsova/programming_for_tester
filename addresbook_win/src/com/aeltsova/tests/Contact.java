@@ -1,17 +1,19 @@
 package com.aeltsova.tests;
 
-public class Contact {
+public class Contact implements Comparable<Contact> {
 
 	public String firstName;
 	public String lastName;
 	
 	public Contact setFirstName(String name) {
-		firstName = name;
+		if (name == null){firstName = "";}
+		else {firstName = name;}
 		return this;
 	}
 	
 	public Contact setLastName(String name) {
-		lastName = name;
+		if (name == null){lastName = "";}
+		else {lastName = name;}
 		return this;
 	}
 	
@@ -62,5 +64,15 @@ public class Contact {
 		return true;
 	}
 	
+	@Override
+	public int compareTo(Contact other) {
+		 if (this.firstName == null)
+		     this.firstName = "";
+		   if (other.firstName == null)
+		      other.firstName = "";
+				return 	this.firstName.toLowerCase().compareTo(other.firstName.toLowerCase());	}
 	
-}
+	}
+	
+	
+

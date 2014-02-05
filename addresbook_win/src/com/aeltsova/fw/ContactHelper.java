@@ -1,5 +1,12 @@
 package com.aeltsova.fw;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aeltsova.tests.Contact;
 
 public class ContactHelper extends HelperBasic {
@@ -57,4 +64,23 @@ public class ContactHelper extends HelperBasic {
 		waitMainWindow();
 	}
 	
+	public List<Contact> getALLCont() throws IOException, InterruptedException {
+		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
+				.click("Select All").click("Export").winWaitAndActivate("Сохранить как", "", 5000)
+				.focus("ComboBox2").send("text").click("Button2").winWaitAndActivate("Information", "", 5000).click("TButton1");
+        File file = new File("text.csv");
+        FileReader read = new FileReader(file);
+		BufferedReader buff = new BufferedReader(read);
+		String line0 =buff.readLine();
+		String line =buff.readLine();
+		List <Contact> contacts = new ArrayList<Contact>();
+		while( line!= null){
+			String[] part = line.split(",");
+		Contact cont = new Contact().setFirstName(part[0]).setLastName(part[1]);
+		contacts.add(cont);
+		line =buff.readLine();
+		}
+		buff.close();
+		return contacts;
+	}
 }
