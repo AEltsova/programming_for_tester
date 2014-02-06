@@ -64,11 +64,12 @@ public class ContactHelper extends HelperBasic {
 		waitMainWindow();
 	}
 	
-	public List<Contact> getALLCont() throws IOException, InterruptedException {
+	public List<Contact> getALLCont(String filename) throws IOException, InterruptedException {
+
 		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
 				.click("Select All").click("Export").winWaitAndActivate("Сохранить как", "", 5000)
-				.focus("ComboBox2").send("text").click("Button2").winWaitAndActivate("Information", "", 5000).click("TButton1");
-        File file = new File("text.csv");
+				.send(filename).click("Button2").winWaitAndActivate("Information", "", 5000).click("TButton1");
+        File file = new File(filename);
         FileReader read = new FileReader(file);
 		BufferedReader buff = new BufferedReader(read);
 		String line0 =buff.readLine();
@@ -81,6 +82,8 @@ public class ContactHelper extends HelperBasic {
 		line =buff.readLine();
 		}
 		buff.close();
+		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
+		.click("Deselect All");
 		return contacts;
 	}
 }
