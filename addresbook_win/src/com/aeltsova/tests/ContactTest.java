@@ -12,10 +12,13 @@ public class ContactTest extends BasicClass{
 	@Test
 	public void createContact() throws IOException, InterruptedException{
 	Contact contact = new Contact().setFirstName("Test").setLastName("TestLastName");
-	List<Contact> old = controlManager.getContHelp().getALLCont("fileold.csv");
+	String filename = "fileold.csv";
+	List<Contact> old = controlManager.getContHelp().getALLCont(filename);
 	controlManager.getContHelp().createContact(contact);
-	List<Contact> saved = controlManager.getContHelp().getALLCont("filenew.csv");
+	String filename2 = "filenew.csv";
+	List<Contact> saved = controlManager.getContHelp().getALLCont(filename2);
 	old.add(contact);
+    Collections.sort(saved);
     Collections.sort(old);
 	Assert.assertEquals(saved, old);
 		}

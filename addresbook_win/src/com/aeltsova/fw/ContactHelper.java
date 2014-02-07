@@ -67,8 +67,8 @@ public class ContactHelper extends HelperBasic {
 	public List<Contact> getALLCont(String filename) throws IOException, InterruptedException {
 
 		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
-				.click("Select All").click("Export").winWaitAndActivate("Сохранить как", "", 5000)
-				.send(filename).click("Button2").winWaitAndActivate("Information", "", 5000).click("TButton1");
+				.click("Select All").click("Export")
+			.send("Edit1",filename).send("{ENTER}").winWaitAndActivate("Information", "", 5000).click("TButton1");
         File file = new File(filename);
         FileReader read = new FileReader(file);
 		BufferedReader buff = new BufferedReader(read);
