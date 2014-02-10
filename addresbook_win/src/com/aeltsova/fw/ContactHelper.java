@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aeltsova.tests.Contact;
+import com.aeltsova.utils.SortedListOf;
 
 public class ContactHelper extends HelperBasic {
 
@@ -64,7 +65,7 @@ public class ContactHelper extends HelperBasic {
 		waitMainWindow();
 	}
 	
-	public List<Contact> getALLCont() throws IOException, InterruptedException {
+	public SortedListOf<Contact> getALLCont() throws IOException, InterruptedException {
 
 		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
 				.click("Select All").click("Export")
@@ -85,6 +86,7 @@ public class ContactHelper extends HelperBasic {
 		onControl.getAutoHelp().winWaitAndActivate("AddressBook Portable", "", 3000)
 		.click("Deselect All");
 		file.delete();
-		return contacts;
+		SortedListOf<Contact> contact = new SortedListOf<Contact>(contacts);
+		return contact;
 	}
 }
