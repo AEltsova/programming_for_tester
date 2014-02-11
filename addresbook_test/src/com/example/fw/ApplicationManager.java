@@ -11,19 +11,35 @@ public class ApplicationManager {
 	public ContactHelper contactF1;
 	public GroupHelper groupF1;
 	public NavigationHelper navigationF1;
-	public  WebDriver driver;
+	private  WebDriver driver;
+	private ApplicationModel model;
+
 	public  String baseUrl;
 	private Properties properties;
+	private HibernateHelper hibernateHelper;
 	
 	public ApplicationManager (Properties properties) {	
 	    this.properties = properties;
+	    model = new ApplicationModel();
+	    model.setGroups(checHkibernateHelper().listGroups());
+	   }
+	
+	public WebDriver getDriver() {
 	    String browser = properties.getProperty("browser");
-	    if ("firefox".equals(browser)){ driver = new FirefoxDriver();}
-	    else if("ie".equals(browser)){ driver = new InternetExplorerDriver();}
-	    else {throw new Error ("Never heard about this browser");}
-	    baseUrl = properties.getProperty("baseUrl");
-		driver.get(baseUrl);
-   }
+		if (driver == null) {
+		    if ("firefox".equals(browser)){ driver = new FirefoxDriver();}
+		    else if("ie".equals(browser)){ driver = new InternetExplorerDriver();}
+		    else {throw new Error ("Never heard about this browser");}
+		    baseUrl = properties.getProperty("baseUrl");
+			driver.get(baseUrl);
+					}
+		return driver;
+	}
+	
+	
+	public ApplicationModel getModel() {
+		return model;
+	}
 	
 	public NavigationHelper checkNavigationHelper () {
 		if (navigationF1 == null) {
@@ -44,6 +60,13 @@ public class ApplicationManager {
 			contactF1 = new ContactHelper(this);
 	}
 	return contactF1;
+	}
+	
+	public HibernateHelper checHkibernateHelper () {
+		if (hibernateHelper == null) {
+			hibernateHelper = new HibernateHelper(this);
+		}
+		return hibernateHelper;
 	}
 
 	public void stop() {

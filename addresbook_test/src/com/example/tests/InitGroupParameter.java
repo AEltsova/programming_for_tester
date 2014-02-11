@@ -4,6 +4,11 @@ public class InitGroupParameter implements Comparable <InitGroupParameter>  {
 	private String nameGroup;
 	private String head;
 	private String foot;
+	private String id;
+
+	public String getId() {
+		return id;
+	}
 
 	public String getNameGroup() {
 		return nameGroup;
@@ -26,6 +31,11 @@ public class InitGroupParameter implements Comparable <InitGroupParameter>  {
 	public InitGroupParameter() {
 	}
 	
+	public InitGroupParameter withId(String id) {
+		this.id = id;
+		return this;
+	}
+
 	public InitGroupParameter withName(String name) {
 		this.nameGroup = name;
 		return this;
@@ -76,4 +86,22 @@ public class InitGroupParameter implements Comparable <InitGroupParameter>  {
 		
 		return this.nameGroup.toLowerCase().compareTo(other.nameGroup.toLowerCase());
 	}
+
+	public void setNameGroup(String nameGroup) {
+		this.nameGroup = nameGroup;
+	}
+
+	public void setHead(String head) {
+		this.head = head;
+	}
+
+	public void setFoot(String foot) {
+		this.foot = foot;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 }

@@ -18,7 +18,7 @@ public class BasicClass extends Object{
 		 
 	@BeforeTest
 	public void setUp() throws Exception {
-		String confFile = System.getProperty("configFile","application.properties" );
+		String confFile = System.getProperty("configFile", "application.properties");
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(confFile)));
 		controlManager = new ApplicationManager(properties);

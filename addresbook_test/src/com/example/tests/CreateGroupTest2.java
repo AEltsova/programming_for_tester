@@ -24,7 +24,7 @@ public class CreateGroupTest2 extends BasicClass {
 @Test  (dataProvider = "loadGroupFromFile")
   public void testNonEmpty( InitGroupParameter x) throws Exception {
     //save old list
-	SortedListOf<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();
+	SortedListOf<InitGroupParameter> oldList= controlManager.checHkibernateHelper().listGroups();
     
     // do something
     controlManager.checkGroupHelper().createGroup(x);

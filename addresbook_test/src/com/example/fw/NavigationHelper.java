@@ -2,7 +2,7 @@ package com.example.fw;
 
 import org.openqa.selenium.By;
 
-public class NavigationHelper extends BasicHelper{
+public class NavigationHelper extends WebDriverHelper{
 	
 	public NavigationHelper(ApplicationManager linkToAM) {
 		super(linkToAM);
@@ -15,8 +15,7 @@ public class NavigationHelper extends BasicHelper{
 
 	public void submit() {
 		pushTheButton(By.name("submit"));
-		linkToAM.checkGroupHelper().cachedGroups = null;
-		linkToAM.checkContactHelper().cachedContacts = null;
+
 	}
 
 	public void openSourseForTest() {

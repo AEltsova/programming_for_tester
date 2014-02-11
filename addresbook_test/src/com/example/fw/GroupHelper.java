@@ -8,36 +8,31 @@ import org.openqa.selenium.WebElement;
 import com.example.tests.InitGroupParameter;
 import com.example.utils.*;
 
-public class GroupHelper extends BasicHelper {
+public class GroupHelper extends WebDriverHelper {
 	
 	public GroupHelper(ApplicationManager linkToAM) {
 		super(linkToAM);
 	}
 
-	protected SortedListOf<InitGroupParameter> cachedGroups;
-	
-	public SortedListOf<InitGroupParameter> getGroupList() {
-		if (cachedGroups == null) { makeCachedGroup();}
-		return cachedGroups;
-	}
-	
-	private void makeCachedGroup(){
-		cachedGroups = new SortedListOf<InitGroupParameter>();
+
+	public SortedListOf<InitGroupParameter> getGroupList(){
+		SortedListOf<InitGroupParameter> groups = new SortedListOf<InitGroupParameter>();
 		linkToAM.checkNavigationHelper().goToGroup();
 		List<WebElement> cheks =driver.findElements(By.name("selected[]"));
 		for (WebElement newChek : cheks) {
 			InitGroupParameter group = new InitGroupParameter();
 			String title = newChek.getAttribute("title");
 			group.withName(title.substring("Select (".length(), title.length() - ")".length()));
-			cachedGroups.add(group);
+			groups.add(group);
 		}
+		return groups;
 	}
 	
 	public GroupHelper createGroup (InitGroupParameter x){
 		createNewGroup();
 		initGroup(x);
 		linkToAM.checkNavigationHelper().submit();
-		makeCachedGroup();
+		linkToAM.getModel().addGroup(x);
 		return this;
 	}
 
@@ -46,20 +41,19 @@ public class GroupHelper extends BasicHelper {
 	    InitGroupParameter group = new InitGroupParameter( ).withName("name new data");
 	    initGroup(group);
 	    submitModifyGroup();
-		makeCachedGroup();
+		linkToAM.getModel().removeGroup(y).addGroup(group);
 		return group;
 	}
 	
 	public GroupHelper deleteGroup(int x) {
 		selectGroupOnNumber(x);
 		removeGroup();
-		makeCachedGroup();
+		linkToAM.getModel().removeGroup(x);
 		return this;
 	}
 
 	public void removeGroup() {
 		pushTheButton(By.name("delete"));
-		cachedGroups = null;
 	}
 	
 	public GroupHelper initGroup(InitGroupParameter myBook) {
@@ -87,7 +81,6 @@ public class GroupHelper extends BasicHelper {
 	
 	public GroupHelper submitModifyGroup() {
 		pushTheButton(By.name("update"));	
-		cachedGroups = null;
 		return this;
 	}
 }

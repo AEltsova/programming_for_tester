@@ -7,16 +7,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class BasicHelper {
+public abstract class WebDriverHelper extends HelperBase {
 	
-	public ApplicationManager linkToAM;
+
 	public WebDriver driver;
 	public boolean acceptNextAlert = true;
+	private WebDriverWait wait;
 
-	protected BasicHelper(ApplicationManager linkToAM){
-		this.linkToAM = linkToAM;
-		this.driver = linkToAM.driver;
+	protected WebDriverHelper(ApplicationManager linkToAM){
+		super(linkToAM);
+		this.driver = linkToAM.getDriver();
+		wait = new WebDriverWait(driver, 10);
 	}
 
 	public boolean isElementPresent(By by) {

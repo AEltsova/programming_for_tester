@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.example.tests.InitContactParameter;
 import com.example.utils.SortedListOf;
 
-public class ContactHelper extends BasicHelper {
+public class ContactHelper extends WebDriverHelper {
 	
 	protected ContactHelper(ApplicationManager linkToAM) {
 		super(linkToAM);
