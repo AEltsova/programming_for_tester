@@ -29,6 +29,7 @@ public class GroupHelper extends WebDriverHelper {
 	}
 	
 	public GroupHelper createGroup (InitGroupParameter x){
+		linkToAM.checkNavigationHelper().goToGroup();
 		createNewGroup();
 		initGroup(x);
 		linkToAM.checkNavigationHelper().submit();
@@ -37,6 +38,7 @@ public class GroupHelper extends WebDriverHelper {
 	}
 
 	public InitGroupParameter modifyGroupCombo(int y){
+		linkToAM.checkNavigationHelper().goToGroup();
 		modifyGroup(y);	
 	    InitGroupParameter group = new InitGroupParameter( ).withName("name new data");
 	    initGroup(group);
@@ -46,6 +48,7 @@ public class GroupHelper extends WebDriverHelper {
 	}
 	
 	public GroupHelper deleteGroup(int x) {
+		linkToAM.checkNavigationHelper().goToGroup();
 		selectGroupOnNumber(x);
 		removeGroup();
 		linkToAM.getModel().removeGroup(x);

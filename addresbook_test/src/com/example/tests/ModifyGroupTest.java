@@ -12,7 +12,7 @@ public class ModifyGroupTest extends BasicClass {
 	@Test
 	public void modificationGroup(){
 	    //save old list
-		SortedListOf<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();
+		SortedListOf<InitGroupParameter> oldList= controlManager.checHkibernateHelper().listGroups();
 	    
 	    // do something
 	    int y = 0;

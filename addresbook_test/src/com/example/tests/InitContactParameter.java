@@ -14,6 +14,7 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 	private String year;
 	private String add2;
 	private String ph2;
+	private String id;
 
 	public InitContactParameter(String fname, String lname, String address,
 			String home, String email, String mobile, String work,
@@ -37,6 +38,9 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 	}
 		
 	
+	public String getId() {
+		return id;
+	}
 	public String getFname() {
 		return fname;
 	}
@@ -141,6 +145,49 @@ public class InitContactParameter implements Comparable <InitContactParameter>{
 		return this;
 	}
 	
+	
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void setHome(String home) {
+		this.home = home;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public void setWork(String work) {
+		this.work = work;
+	}
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public void setMounth(String mounth) {
+		this.mounth = mounth;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public void setAdd2(String add2) {
+		this.add2 = add2;
+	}
+	public void setPh2(String ph2) {
+		this.ph2 = ph2;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "InitContactParameter [fname=" + fname + ", lname=" + lname

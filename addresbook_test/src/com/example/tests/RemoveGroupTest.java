@@ -11,8 +11,7 @@ public class RemoveGroupTest extends BasicClass {
 	
 	@Test
 	public void removeGroup(){
-	    //save old list
-	    SortedListOf<InitGroupParameter> oldList= controlManager.checkGroupHelper().getGroupList();
+		SortedListOf<InitGroupParameter> oldList= controlManager.checHkibernateHelper().listGroups();
 	    
 	    // do something
 	    int y = 0;

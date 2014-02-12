@@ -25,7 +25,7 @@ public class CreateContactTest extends BasicClass{
 @Test  (dataProvider = "loadContactFromFile")
   public void testContact(InitContactParameter z) throws Exception {
 	//save list
-	SortedListOf<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
+	SortedListOf<InitContactParameter> oldList= controlManager.checHkibernateHelper().listContacts();
 	
 	//do something
 	controlManager.checkContactHelper().createContactCombo(z);

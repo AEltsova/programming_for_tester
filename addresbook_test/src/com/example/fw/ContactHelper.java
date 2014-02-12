@@ -15,16 +15,10 @@ public class ContactHelper extends WebDriverHelper {
 		super(linkToAM);
 	}
 	
-	protected SortedListOf<InitContactParameter> cachedContacts;
-	
-	public SortedListOf<InitContactParameter> getContactList() {
-		if (cachedContacts == null) { makeCachedContacts();}
-		return cachedContacts;
-	}
 
-	private void makeCachedContacts(){
+	public SortedListOf<InitContactParameter> getContactList(){
 	linkToAM.checkNavigationHelper().comingHome();
-	cachedContacts = new SortedListOf<InitContactParameter>();
+	SortedListOf<InitContactParameter> contacts = new SortedListOf<InitContactParameter>();
 	int i = 2;
 	List<WebElement> cheks = driver.findElements(By.name("selected[]"));;
 	for (;i<= (cheks.size()+1);) {
@@ -33,9 +27,10 @@ public class ContactHelper extends WebDriverHelper {
 		InitContactParameter contact = new InitContactParameter();
 		contact.withLname(cellName.getText());
 		contact.withFname(cellLastName.getText());
-		cachedContacts.add(contact);
+		contacts.add(contact);
 		i++;
 	}
+	return contacts;
 }	
 	
 	public SortedListOf<InitContactParameter> mainTable(){
@@ -85,6 +80,7 @@ public class ContactHelper extends WebDriverHelper {
 	}
 	
 	public InitContactParameter modifyContactCombo (int y){
+		linkToAM.checkNavigationHelper().comingHome();
 		selectContactOnNumber(y);
 		Random rand = new Random();
 		InitContactParameter cont = new InitContactParameter( )
@@ -97,21 +93,24 @@ public class ContactHelper extends WebDriverHelper {
 		.withAdd2("d"+rand.nextInt(1000));
 		createAndInit(cont);
 		submitModify();
-		makeCachedContacts();
+		linkToAM.getModel2().addContact(cont).removeContact(y);
 		return cont;
 	}
 	
 	public void createContactCombo (InitContactParameter z){
+		linkToAM.checkNavigationHelper().comingHome();
 		createContact();
 	    createAndInit(z);
 	    linkToAM.checkNavigationHelper().submit();	
-		makeCachedContacts();
+	    linkToAM.getModel2().addContact(z);
+
 	}
 	
 	public ContactHelper deleteContact(int index) {
+		linkToAM.checkNavigationHelper().comingHome();
 		selectContactOnNumber(index);
 		removeContact();
-		makeCachedContacts();
+		linkToAM.getModel2().removeContact(index);
 		   return this;
 }
 	
@@ -139,7 +138,7 @@ public class ContactHelper extends WebDriverHelper {
 
 	public void removeContact() {
 		pushTheButton(By.xpath("(//input[@name='update'])[2]"));
-		cachedContacts = null;
+
 	}
 
 	public ContactHelper selectContactOnNumber(int index) {
@@ -149,7 +148,7 @@ public class ContactHelper extends WebDriverHelper {
 
 	public ContactHelper submitModify() {
 		pushTheButton(By.xpath("(//input[@name='update'])[1]"));
-		cachedContacts = null;
+
 		   return this;
 	}
 	public ContactHelper printPhones(){

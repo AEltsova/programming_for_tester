@@ -13,6 +13,7 @@ public class ApplicationManager {
 	public NavigationHelper navigationF1;
 	private  WebDriver driver;
 	private ApplicationModel model;
+	private ApplicationModel model2;
 
 	public  String baseUrl;
 	private Properties properties;
@@ -20,8 +21,9 @@ public class ApplicationManager {
 	
 	public ApplicationManager (Properties properties) {	
 	    this.properties = properties;
-	    model = new ApplicationModel();
+	    model =model2= new ApplicationModel();
 	    model.setGroups(checHkibernateHelper().listGroups());
+	    model2.setContacts(checHkibernateHelper().listContacts());
 	   }
 	
 	public WebDriver getDriver() {
@@ -39,6 +41,10 @@ public class ApplicationManager {
 	
 	public ApplicationModel getModel() {
 		return model;
+	}
+	
+	public ApplicationModel getModel2() {
+		return model2;
 	}
 	
 	public NavigationHelper checkNavigationHelper () {

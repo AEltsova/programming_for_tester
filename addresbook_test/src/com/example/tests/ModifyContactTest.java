@@ -12,7 +12,7 @@ public class ModifyContactTest extends BasicClass{
 	@Test
 	public void modificationContact(){
 		//save list
-		SortedListOf<InitContactParameter> oldList= controlManager.checkContactHelper().getContactList();
+		SortedListOf<InitContactParameter> oldList= controlManager.checHkibernateHelper().listContacts();
 		
 		//do something
 	    int y = 0;

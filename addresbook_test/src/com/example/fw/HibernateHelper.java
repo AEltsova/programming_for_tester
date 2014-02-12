@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.example.tests.InitContactParameter;
 import com.example.tests.InitGroupParameter;
 import com.example.utils.SortedListOf;
 
@@ -21,6 +22,16 @@ public class HibernateHelper extends HelperBase {
 		try {
           return new SortedListOf<InitGroupParameter>(
               (List<InitGroupParameter>) session.createQuery("from InitGroupParameter").list());
+		} finally {
+          trans.commit();
+		}
+	}
+	public SortedListOf<InitContactParameter> listContacts() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction trans = session.beginTransaction();
+		try {
+          return new SortedListOf<InitContactParameter>(
+              (List<InitContactParameter>) session.createQuery("from InitContactParameter").list());
 		} finally {
           trans.commit();
 		}
