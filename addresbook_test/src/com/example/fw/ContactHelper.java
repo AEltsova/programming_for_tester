@@ -79,9 +79,14 @@ public class ContactHelper extends WebDriverHelper {
 		return printContact;
 	}
 	
-	public InitContactParameter modifyContactCombo (int y){
+	public InitContactParameter modifyContactCombo (int y, InitContactParameter contact){
 		linkToAM.checkNavigationHelper().comingHome();
 		selectContactOnNumber(y);
+		WebElement findElement1 = driver.findElement(By.xpath("//input[2]"));
+		WebElement findElement2 = driver.findElement(By.xpath("//input[3]"));
+		InitContactParameter founded = new InitContactParameter().withFname(findElement1.getAttribute("value"))
+				.withLname(findElement2.getAttribute("value"));
+		if (founded.equals(contact)){
 		Random rand = new Random();
 		InitContactParameter cont = new InitContactParameter( )
 		.withFname("First name"+ rand.nextInt(365))
@@ -94,7 +99,10 @@ public class ContactHelper extends WebDriverHelper {
 		createAndInit(cont);
 		submitModify();
 		linkToAM.getModel2().addContact(cont).removeContact(y);
-		return cont;
+		return cont;}
+		else {
+			System.out.println("Bad news :(");
+			return null;}
 	}
 	
 	public void createContactCombo (InitContactParameter z){

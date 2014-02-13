@@ -16,7 +16,7 @@ public class ModifyContactTest extends BasicClass{
 		
 		//do something
 	    int y = 0;
-		InitContactParameter cont = controlManager.checkContactHelper().modifyContactCombo (y);
+		InitContactParameter cont = controlManager.checkContactHelper().modifyContactCombo(y, oldList.get(y+1));
 
 	    //save new list
 		SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
