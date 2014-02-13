@@ -25,16 +25,21 @@ public class CreateContactTest extends BasicClass{
 @Test  (dataProvider = "loadContactFromFile")
   public void testContact(InitContactParameter z) throws Exception {
 	//save list
-	SortedListOf<InitContactParameter> oldList= controlManager.checHkibernateHelper().listContacts();
+	SortedListOf<InitContactParameter> oldList= controlManager.getModel2().getContacts();
 	
 	//do something
 	controlManager.checkContactHelper().createContactCombo(z);
 
     //save new list
-    SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
+    SortedListOf<InitContactParameter> newList= controlManager.getModel2().getContacts();
     
     //check
     assertThat(newList, equalTo(oldList.withAdded(z))); 
-  }
-}
+    
+    if (mustHave()){
+    if (controlManager.getProperty("checing").equals("yes")){
+        assertThat(controlManager.getModel2().getContacts(), equalTo(controlManager.checkContactHelper().getContactList())); 
+        assertThat(controlManager.getModel2().getContacts(), equalTo(controlManager.checHkibernateHelper().listContacts()));
+	}
+}}}
 

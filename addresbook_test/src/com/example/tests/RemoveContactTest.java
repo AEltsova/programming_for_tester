@@ -12,16 +12,21 @@ public class RemoveContactTest extends BasicClass {
 	@Test
 	public void removeContact(){
 		//save list
-		SortedListOf<InitContactParameter> oldList= controlManager.checHkibernateHelper().listContacts();
+		SortedListOf<InitContactParameter> oldList= controlManager.getModel2().getContacts();
 		
 		//do something
 	    int y = 0;
 	    controlManager.checkContactHelper().deleteContact(y);
 		
 	    //save new list
-	    SortedListOf<InitContactParameter> newList= controlManager.checkContactHelper().getContactList();
+	    SortedListOf<InitContactParameter> newList= controlManager.getModel2().getContacts();
 	    
 	    //check
 	    assertThat(newList, equalTo(oldList.without(y))); 
+	    
+	    if (controlManager.getProperty("checing").equals("yes")){
+	        assertThat(controlManager.getModel2().getContacts(), equalTo(controlManager.checkContactHelper().getContactList())); 
+	        assertThat(controlManager.getModel2().getContacts(), equalTo(controlManager.checHkibernateHelper().listContacts()));
+		}
 	   	}
 }

@@ -15,6 +15,8 @@ import static com.example.tests.ContactDataGenerator.createRandomContact;;
 public class BasicClass extends Object{
 
 	static protected ApplicationManager controlManager;
+	protected int check;
+	protected int mustHaveCheck;
 		 
 	@BeforeTest
 	public void setUp() throws Exception {
@@ -22,7 +24,18 @@ public class BasicClass extends Object{
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(confFile)));
 		controlManager = new ApplicationManager(properties);
+		check = 0;
+		mustHaveCheck = Integer.parseInt(properties.getProperty("mustHaveCheck", "0"));
 	    }
+	
+	protected boolean mustHave(){
+		check++;
+		if (check> mustHaveCheck){
+			check = 0;
+			return true;
+		} else {return false;}
+		
+	}
 
 	@AfterTest
 	public void tearDown() throws Exception {

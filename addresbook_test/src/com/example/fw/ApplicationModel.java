@@ -15,11 +15,11 @@ public class ApplicationModel {
 	}
 
 	public SortedListOf<InitContactParameter> getContacts() {
-		return contacts;
+		return new SortedListOf<InitContactParameter>(contacts);
 	}
 
 	public SortedListOf<InitGroupParameter> getGroup(){
-		return groups;
+		return new SortedListOf<InitGroupParameter>(groups);
 	}
 
 	public void setGroups(SortedListOf<InitGroupParameter> groups) {
@@ -47,6 +47,4 @@ public class ApplicationModel {
 		contacts.remove(y);
 		return this;
 	}
-	
-	
 }

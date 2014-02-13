@@ -11,16 +11,22 @@ public class RemoveGroupTest extends BasicClass {
 	
 	@Test
 	public void removeGroup(){
-		SortedListOf<InitGroupParameter> oldList= controlManager.checHkibernateHelper().listGroups();
+		SortedListOf<InitGroupParameter> oldList= controlManager.getModel().getGroup();
 	    
 	    // do something
 	    int y = 0;
 	    controlManager.checkGroupHelper().deleteGroup(y);
 	    
 	    //look what happened
-	    SortedListOf<InitGroupParameter> newList= controlManager.checkGroupHelper().getGroupList();
+	    SortedListOf<InitGroupParameter> newList= controlManager.getModel().getGroup();
 	    
 	    //check 
 	    assertThat(newList, equalTo(oldList.without(y))); 
+	    
+	    if (controlManager.getProperty("checing").equals("yes")){
+	        assertThat(controlManager.getModel().getGroup(), equalTo(controlManager.checkGroupHelper().getGroupList())); 
+	        assertThat(controlManager.getModel().getGroup(), equalTo(controlManager.checHkibernateHelper().listGroups()));
+	      }
+	    
 	    }
 }

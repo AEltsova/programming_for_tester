@@ -78,4 +78,8 @@ public class ApplicationManager {
 	public void stop() {
 	    driver.quit();
 }
+	
+	public String getProperty(String key) {
+		return properties.getProperty(key);		
+	}
 }
