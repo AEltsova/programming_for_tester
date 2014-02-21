@@ -15,12 +15,12 @@ public class AccHelper extends HelperBase {
 		pointInData(By.name("username"), user.login);
 		pointInData(By.name("email"), user.email);
 		pushTheButton(By.cssSelector("input.button"));
-		
+		/*
         WebElement errorMessage = driver.findElement(By.cssSelector("table.width50 tbody tr td p"));
         if (errorMessage != null) {
                 throw new RuntimeException(errorMessage.getText());
         }
-
+*/
 		
 		Thread.sleep(3000);
 		

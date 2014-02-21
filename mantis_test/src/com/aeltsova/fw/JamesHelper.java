@@ -7,8 +7,6 @@ import org.apache.commons.net.telnet.TelnetClient;
 
 public class JamesHelper extends HelperBase{
 
-	private ApplicationManager linkToAM;
-
 	private TelnetClient telnet = new TelnetClient();
 	private InputStream in;
 	private PrintStream out;

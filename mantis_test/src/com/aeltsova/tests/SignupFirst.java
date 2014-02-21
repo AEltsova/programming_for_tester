@@ -26,7 +26,7 @@ public class SignupFirst extends BasicClass{
 		controlManager.getJHelper().deleteUser(user.login);}
 	}
 	
-	@Test
+	 @Test
 	public void signUpTest() throws InterruptedException{
 		
 		controlManager.getAccHelper().signup(user);
@@ -34,7 +34,7 @@ public class SignupFirst extends BasicClass{
 		assertThat(controlManager.getAccHelper().isLogged(),equalTo(user.login));
 	}
 	
-   // @Test
+   //@Test
     public void existingUserShouldNotSignup() {
             try {
             	controlManager.getAccHelper().signup(user);
